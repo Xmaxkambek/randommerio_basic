@@ -1,9 +1,7 @@
-import 'package:randommerio_basic/randommerio_basic.dart' as randommerio_basic;
+import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:randommerio_basic/getCard.dart';
 
-void main() async {
-  // Create a URL to the Randommer.io API
+Future<Map> getCard() async {
   Uri url = Uri(
     scheme: 'https',
     host: 'randommer.io',
@@ -21,6 +19,8 @@ void main() async {
     url,
     headers: headers,
   );
-  // Print the status code and body of the response
-  print('Status code: ${response.statusCode}');
+  // Convert the response body to a Map
+  Map card = jsonDecode(response.body);
+  // Return the card
+  return card;
 }
